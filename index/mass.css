@@ -1,0 +1,207 @@
+
+
+@import url(https://fonts.bunny.net/css?family=indie-flower:400|parisienne:400);
+h1 {
+  /* LAYER 1: Positioning in front */
+  z-index: 100; /* Higher than circle-container (1) and snow (99) if needed */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  
+  /* Dimensions */
+  width: calc(var(--radius) * 0.85); 
+  aspect-ratio: 1;
+  border-radius: 50%;
+  
+  /* VISUAL IMPACT: Gold glow and solid background */
+  background: var(--noria-car-bg);
+  border: 5px double var(--h1-text-color);
+  color: var(--h1-text-color);
+  
+  /* Text Styling */
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(1rem, 4.5vw, 2.8rem);
+  text-align: center;
+  line-height: 1.1;
+  
+  /* Centering the text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  margin: 0;
+  
+  /* GLOW EFFECT: Makes it pop forward */
+  box-shadow: 
+    0 0 30px rgba(240, 177, 0, 0.4), 
+    inset 0 0 20px rgba(0, 0, 0, 0.6);
+  
+  /* Subtle scaling animation to draw the eye first */
+  animation: center-pop 3s ease-in-out infinite alternate;
+}
+
+@keyframes center-pop {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.08); filter: brightness(1.2); }
+}
+
+/* Ensure the rotating container stays behind the H1 */
+.circle-container {
+  z-index: 10;
+  animation: rotate-it var(--animation-duration) linear infinite;
+}
+:root {
+  --animation-duration: 60s;
+  /* RESPONSIVE RADIUS - Adjusts for mobile and desktop */
+  --radius: min(38vw, 400px); 
+  --pi: 3.141592653589793;
+  --noria-car-bg: rgb(3 46 21);
+  --h1-text-color: rgb(240 177 0);
+  --message-font-family: 'Indie Flower', handwriting;
+}
+
+/* --- THE HEAVY BLIZZARD --- */
+.sound-control {
+  position: fixed;
+  top: 0 !important; right: 0 !important;
+  z-index: 10001;
+  width: 44px; height: 44px;
+  background: var(--h1-text-color);
+  border: none; border-bottom-left-radius: 10px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  padding: 0; margin: 0;
+}
+/* --- THE FAST BLIZZARD FIX --- */
+.snow-wrapper {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  translate: 0 0 !important;
+  z-index: 999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.snow {
+  position: absolute;
+  top: -20vh;
+  color: white;
+  opacity: 0.9;
+  user-select: none;
+  /* Faster speeds: 2s to 5s instead of 10s */
+  animation: fall linear infinite, sway ease-in-out infinite;
+}
+
+@keyframes fall {
+  0% { top: -20vh; }
+  100% { top: 120vh; }
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(60px); } /* Wider sway for wind effect */
+}
+
+/* Speed and Size Randomization (Fast Tiers) */
+.snow:nth-child(3n) { 
+  font-size: 1.8rem; 
+  animation-duration: 2.5s, 1.5s; /* Very Fast */
+  filter: blur(1px); /* Motion blur */
+}
+.snow:nth-child(3n+1) { 
+  font-size: 0.9rem; 
+  animation-duration: 4s, 2s; /* Medium Fast */
+}
+.snow:nth-child(3n+2) { 
+  font-size: 0.5rem; 
+  animation-duration: 3s, 1.8s; /* Fast and small */
+  opacity: 0.6;
+}
+
+/* Spread across the screen width */
+.snow:nth-child(1) { left: 5%; } .snow:nth-child(2) { left: 15%; }
+.snow:nth-child(3) { left: 25%; } .snow:nth-child(4) { left: 35%; }
+.snow:nth-child(5) { left: 45%; } .snow:nth-child(6) { left: 55%; }
+.snow:nth-child(7) { left: 65%; } .snow:nth-child(8) { left: 75%; }
+.snow:nth-child(9) { left: 85%; } .snow:nth-child(10) { left: 95%; }
+.snow:nth-child(11) { left: 10%; animation-delay: 0.5s; }
+.snow:nth-child(12) { left: 20%; animation-delay: 1.2s; }
+.snow:nth-child(13) { left: 30%; animation-delay: 0.8s; }
+.snow:nth-child(14) { left: 40%; animation-delay: 2s; }
+.snow:nth-child(15) { left: 50%; animation-delay: 1.5s; }
+/* ... Add more as needed ... */
+
+/* --- H1 CENTER (STILL FIRST) --- */
+h1 {
+  z-index: 100;
+  position: fixed;
+  top: 50%; left: 50%;
+  translate: -50% -50%;
+  width: calc(var(--radius) * 0.85);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--noria-car-bg);
+  border: 5px double var(--h1-text-color);
+  color: var(--h1-text-color);
+  font-family: 'Parisienne';
+  font-size: clamp(1rem, 4.5vw, 2.8rem);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 25px;
+  box-shadow: 0 0 30px rgba(240, 177, 0, 0.4);
+}
+/* --- CORE LAYOUT --- */
+body {
+  background: radial-gradient(rgb(159, 7, 18), rgb(70, 8, 9), black);
+  margin: 0; min-height: 100vh; overflow: hidden;
+}
+
+body > *:not(.snow-wrapper):not(.sound-control):not(audio) {
+  position: fixed; top: 50%; left: 50%; translate: -50% -50%;
+}
+
+/* CENTER TEXT CIRCLE */
+
+
+/* THE TOUCHING CIRCLES */
+.circle-container > div {
+  --items: 14;
+  /* MULTIPLIER 1.01: Makes them touch side-by-side */
+  --car-size: calc((2 * var(--pi) * var(--radius) / var(--items)) * 1.01);
+  
+  position: absolute;
+  width: var(--car-size); height: var(--car-size);
+  background: var(--noria-car-bg);
+  border: 1px solid rgba(255, 240, 150, 0.3);
+  border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  animation: rotate-it var(--animation-duration) linear infinite reverse;
+}
+
+.circle-container > div {
+  --i: sibling-index();
+  --car-angle: calc((360deg / 14) * var(--i));
+  left: calc(50% + (var(--radius) * cos(var(--car-angle))));
+  top: calc(50% + (var(--radius) * sin(var(--car-angle))));
+  translate: -50% -50%;
+}
+
+.circle-container img { width: 30%; margin-bottom: 2px; }
+.circle-container div::before {
+  content: attr(data-msg);
+  color: white; font-family: var(--message-font-family);
+  font-size: clamp(0.4rem, 1.2vw, 0.7rem);
+  text-align: center; padding: 0 5px;
+}
+
+.noria, .circle-container { animation: rotate-it var(--animation-duration) linear infinite; }
+@keyframes rotate-it { to { rotate: 1turn; } }
+
+/* RESPONSIVE TWEAKS FOR MOBILE */
+@media (max-width: 600px) {
+  :root { --radius: 38vw; }
+  h1 { font-size: 1.2rem; width: calc(var(--radius) * 0.9); }
+  .circle-container div::before { font-size: 0.55rem; }
+}
